@@ -22,14 +22,15 @@ module.exports = {
     "parser": "babel-eslint",
     plugins: ["react", "import"],
     rules: {
-      "indent": ["error", 2],
+      indent: ["error", 2],
       "linebreak-style": ["error", "unix"],
       quotes: ["error", "single"],
       semi: ["error", "always"],
       "eol-last": 1,
       "no-multiple-empty-lines": ["error", { max: 1, maxEOF: 1}],
       "react/prop-types": 0,
-      "no-console": "error"
+      "no-console": "warn",
+      "import/first": "error"
     },
     settings: {
       react: {
