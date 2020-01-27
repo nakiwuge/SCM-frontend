@@ -1,0 +1,22 @@
+.auth{
+    .left{
+         height: 60vh;
+        background-color:$color-primary;
+        margin-top: 20vh;
+        text-align: center;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        .logo{
+             margin-top: 20vh;
+             color: $color-secondary;
+             font-size: 30px;
+             display:inline-block;
+             span{
+                 color:white;
+                 font-size: 120px;
+                 margin-right: 10px;
+                 font-weight: bold;
+             }
+        }
+
+    }
+  }
