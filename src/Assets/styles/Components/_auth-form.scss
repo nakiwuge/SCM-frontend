@@ -10,6 +10,11 @@
     label{
         font-weight:400;
     }
+    .phone{
+        span{
+            color:$color-pale-black
+        }
+    }
 
     button{
         background-color: $color-secondary;

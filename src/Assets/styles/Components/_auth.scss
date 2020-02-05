@@ -5,16 +5,32 @@
         margin-top: 20vh;
         text-align: center;
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+
         .logo{
-             margin-top: 20vh;
+             margin-top: 5vh;
              color: $color-secondary;
              font-size: 30px;
              display:inline-block;
+             animation: text 5s infinite;
+
              span{
                  color:white;
                  font-size: 120px;
                  margin-right: 10px;
                  font-weight: bold;
+             }
+
+             @keyframes text {
+                 0%{
+                     margin-top:5vh;
+                 }
+                 30%{
+                     margin-top: 30vh;
+                 }
+                 85%{
+                    margin-top: 20vh;
+                    letter-spacing: 20px;
+                 }
              }
         }
 

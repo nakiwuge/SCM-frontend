@@ -1,0 +1,10 @@
+.spinner{
+    .spinner-border {
+        width: 1.5rem;
+         height: 1.5rem;
+        margin-right: 10px;
+        border: 0.15em solid currentColor;
+        border-right-color: transparent;
+    }
+    cursor:not-allowed;
+}

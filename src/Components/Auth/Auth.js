@@ -1,7 +1,7 @@
 import React from 'react';
 import Login from './Login';
 
-const Auth = () => {
+const Auth = ({history}) => {
   return (
     <div className="container-fluid auth">
       <div className="row ">
@@ -11,7 +11,7 @@ const Auth = () => {
           </div>
         </div>
         <div className="col-lg-6">
-          <Login/>
+          <Login history={history}/>
         </div>
       </div>
     </div>
