@@ -17,13 +17,12 @@
     }
 
     button{
-        background-color: $color-secondary;
+        background-color: #3C5778;
         font-size: 20px;
+        color: white;
     }
     button:hover{
-       color: $color-pale-black;
-       background-color:$color-light-green;
-
+       background-color:$color-secondary-light;
     }
     .forgot-pwd{
         padding-bottom: 20px;

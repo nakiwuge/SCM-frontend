@@ -50,18 +50,28 @@ export const setPassword = (data)=>dispatch=>{
 };
 
 export const login = (data)=>dispatch=>{
-  // console.log("lll>",data)
 
   return axios.post('/users/login',data)
     .then((res)=>{
-      console.log('lll>',res.data);
       localStorage.setItem('jwt',res.data.data.token);
       dispatch(authType(types.LOGIN_SUCCESS,res.data.data));
     })
     .catch(err=>{
-      console.log('lll>',err);
 
       dispatch(authType(types.LOGIN_FAILURE,err.response.data.error));
+    });
+};
+
+export const getUser = (id)=>dispatch=>{
+
+  return axios.get(`/users/${id}`)
+    .then((res)=>{
+
+      return dispatch(authType(types.GET_USER_SUCCESS,res.data.data));
+    })
+    .catch(err=>{
+
+      return  dispatch(authType(types.GET_USER_FAILURE,err.response.data.error));
     });
 };
 
@@ -74,7 +84,8 @@ const initiaState = {
   code:null,
   isVerified:null,
   user:null,
-  error:null
+  error:null,
+  currentUser:null
 };
 export const AuthReducer =(state=initiaState,action)=>{
 
@@ -94,6 +105,10 @@ export const AuthReducer =(state=initiaState,action)=>{
   case types.LOGIN_SUCCESS:
     return {...state,user:action.payload};
   case types.LOGIN_FAILURE:
+    return {...state,error:action.payload};
+  case types.GET_USER_SUCCESS:
+    return {...state,currentUser:action.payload};
+  case types.GET_USER_FAILURE:
     return {...state,error:action.payload};
   case types.RESET_ERROR:
     return {...state,error:action.payload};

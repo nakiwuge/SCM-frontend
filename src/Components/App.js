@@ -6,23 +6,29 @@ import Auth from './Auth/Auth';
 import VerifyPhoneNumber from  './Auth/VerifyPhoneNumber';
 import ResetPassword from  './Auth/ResetPassword';
 import VerifyCode from './Auth/VerifyCode';
+import ProtectedRoute from './Protected/ProtectedRoute';
+import Layout from './Common/Layout';
 
 export const NotFound = () => (
-  <h1>Page Not Found</h1>
+  <section>
+    <h1>Page Not Found</h1>
+  </section>
 );
 
-const App = () => {
+const App = ({location, history}) => {
 
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Auth} />
-        <Route exact path="/verify" component={VerifyPhoneNumber} />
-        <Route exact path="/verify-code" component={VerifyCode} />
-        <Route exact path="/password-reset" component={ResetPassword} />
-        <Route component={NotFound} />
-      </Switch>
+      <Layout>
+        <Switch>
+          <ProtectedRoute exact path="/" location={location} history={history} component={Home}  />
+          <Route exact path="/login" component={Auth} />
+          <Route exact path="/verify" component={VerifyPhoneNumber} />
+          <Route exact path="/verify-code" component={VerifyCode} />
+          <Route exact path="/password-reset" component={ResetPassword} />
+          <Route component={NotFound} />
+        </Switch>
+      </Layout>
     </Router>
   );
 };

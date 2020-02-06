@@ -1,0 +1,12 @@
+.top-nav{
+    .navbar{
+         background-color: $color-primary;
+        .navbar-header{
+            width: 10%;
+            menu{
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}

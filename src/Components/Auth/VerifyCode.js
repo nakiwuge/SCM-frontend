@@ -29,17 +29,19 @@ const VerifyCode = ({isVerified,verifyCode,error,history,resetError})=> {
 
   return (
     <div className="container verify">
-      <div className="alert alert-info">
+      <section>
+        <div className="alert alert-info">
        A verification code has been sent to your phone number. Please provide the code in the form below.
-        <p>Click <Link to='verify'>here</Link> to resend code </p>
-      </div>
-      <AuthForm
-        action="verify-code"
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        error={err}
-        isLoading={isLoading}
-      />
+          <p>Click <Link to='verify'>here</Link> to resend code </p>
+        </div>
+        <AuthForm
+          action="verify-code"
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          error={err}
+          isLoading={isLoading}
+        />
+      </section>
     </div>
   );
 };

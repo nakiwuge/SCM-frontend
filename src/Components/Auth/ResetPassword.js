@@ -31,17 +31,19 @@ const ResetPassword = ({setPassword,error,user, history})=> {
 
   return (
     <div className="container reset-pwd">
-      <h1>Reset Password</h1>
-      <div className="alert alert-info">
+      <section>
+        <h1>Reset Password</h1>
+        <div className="alert alert-info">
      Please fill in the form below to set your password
-      </div>
-      <AuthForm
-        action="reset password"
-        isLoading={isLoading}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        error={err}
-      />
+        </div>
+        <AuthForm
+          action="reset password"
+          isLoading={isLoading}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          error={err}
+        />
+      </section>
     </div>
   );
 };
