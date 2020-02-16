@@ -3,9 +3,14 @@
          background-color: $color-primary;
         .navbar-header{
             width: 10%;
-            menu{
-                position: absolute;
-                right: 0;
+            .navbar-brand{
+                color:white;
+                font-size: 2em;
+                font-weight: bold;
+                span{
+                    font-size:0.7em;
+                    font-weight:lighter;
+                }
             }
         }
     }

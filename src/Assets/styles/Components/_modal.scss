@@ -1,0 +1,31 @@
+.modal{
+    background-color: rgba(0,0,0,0.4);
+    .modal-title {
+       color:$color-black;
+    }
+    .modal-footer{
+        .btn-primary{
+            background-color:$color-primary;
+            border-color:$color-primary;
+        }
+        .btn-primary:hover{
+            background-color:$color-primary-light;
+        }
+    }
+    .phone{
+        span{
+            color:$color-pale-black
+        }
+    }
+    .balance{
+        span{
+            font-weight: bold;
+            color:$color-black;
+        }
+    }
+
+}
+
+.open{
+    display:block;
+}

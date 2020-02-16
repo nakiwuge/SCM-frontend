@@ -8,3 +8,21 @@ export const isRequired =(data)=>{
   });
   return error;
 };
+
+export const isEmail=(email)=>{
+  const re = /^\S+@\S+\.\S+$/;
+
+  if (!email.match(re)){
+    return 'Invalid Email';
+  }
+};
+
+export const currency = (string)=>{
+  const toNumber = string&&parseInt(string.replace(/\D/g, ''));
+
+  if(isNaN(toNumber)){
+    return '';
+  }
+
+  return toNumber.toLocaleString();
+};

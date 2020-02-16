@@ -34,6 +34,6 @@ export const authService = {
 
     this.logoutUser();
     localStorage.setItem('locationReferrer', referrer);
-    window.location.replace('/login');
+    // window.location.replace('/login');
   }
 };
