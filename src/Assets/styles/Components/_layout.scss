@@ -1,9 +1,24 @@
 .layout{
+    width: 100%;
     .nav-left{
         height: 100vh;
-        background : url("../../images/bg.jpg");
+         background : url("../../images/bg.jpg");
+    }
+    .menu{
+        position: absolute;
+        top:0;
+        left:0;
+        height: 60%;
+         width: 35vh;
+         z-index: 30;
     }
     .content{
-        min-height: 110vh;
+        min-height: 100vh;
     }
+
+    @media only screen and (max-width: 993px) {
+        .nav-left {
+          display: none;
+        }
+      }
 }

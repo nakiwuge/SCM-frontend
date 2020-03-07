@@ -1,14 +1,16 @@
-import { http } from '../../Config/axios';
+
 import * as types from '../Types';
+import axios from 'axios';
+import {config} from '../../Config/axios';
 
 const roleType = (type,payload)=>({
   type,
   payload
 });
 
-export const getRoles = ()=>dispatch=>{
+export const getRoles = ()=>async dispatch=>{
 
-  return http.get('/admin/roles')
+  return axios.get('/admin/roles', await config())
     .then((res)=>{
       return  dispatch(roleType(types.GET_ROLES_SUCCESS,res.data.data));
     })
@@ -29,6 +31,6 @@ export const rolesReducer =(state=initiaState,action)=>{
   case types.GET_ROLES_FAILURE:
     return {...state,error:action.payload};
   default:
-    return initiaState;
+    return state;
   }
 };

@@ -2,16 +2,35 @@
     .navbar{
          background-color: $color-primary;
         .navbar-header{
-            width: 10%;
+            display:flex;
+            flex-direction: row;
+            align-items: baseline;
+
+            #menu{
+                visibility: hidden;
+                color: white;
+                font-size: 1.5em;
+                margin-right: 25%;
+
+            }
             .navbar-brand{
-                color:white;
                 font-size: 2em;
                 font-weight: bold;
+                color: white;
                 span{
                     font-size:0.7em;
                     font-weight:lighter;
                 }
             }
         }
+        
+        @media only screen and (max-width: 993px) {
+            .navbar-header .navbar-brand {
+            font-size: 1.5em;
+            }
+            .navbar-header #menu{
+                visibility:visible;
+            }
+          }
     }
 }

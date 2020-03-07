@@ -1,8 +1,12 @@
 .footer{
-    position: absolute;
+    position: relative;
     width:100%;
-    left:0;
-    bottom: 0;
     height: 5vh;
-    background-color: darkorange;
+    background-color: $color-secondary;
+    text-align: center;
+    p{
+        margin-bottom: 0;
+        padding:6px;
+        color: white;
+    }
 }

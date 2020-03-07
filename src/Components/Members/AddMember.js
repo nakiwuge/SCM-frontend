@@ -4,9 +4,9 @@ import Modal from '../Common/Modal';
 import Select from '../Common/Select';
 import { isRequired, isEmail, currency } from '../../Helpers/validation';
 import { getRoles } from '../../Actions/Roles';
-import { addUser } from '../../Actions/Users';
+import { addUser, getUsers,resetUser } from '../../Actions/Users';
 
-const AddMember = ({toggle,handleToggle,getRoles,roles,addUser,user,errorResponse}) => {
+const AddMember = ({toggle,handleToggle,getRoles,getUsers,resetUser,roles,addUser,user,errorResponse}) => {
   const [data, setData]=useState({
     email:'',
     phoneNumber:'',
@@ -18,7 +18,7 @@ const AddMember = ({toggle,handleToggle,getRoles,roles,addUser,user,errorRespons
 
   useEffect(()=>{
     getRoles();
-  },[roles]);
+  },[]);
 
   useEffect(()=>{
     if(errorResponse){
@@ -28,8 +28,13 @@ const AddMember = ({toggle,handleToggle,getRoles,roles,addUser,user,errorRespons
 
   useEffect(()=>{
     if(user){
+      getUsers();
       handleToggle();
     }
+    return () => {
+      resetUser();
+    };
+
   },[user]);
 
   const handleChange =({target})=>{
@@ -93,10 +98,20 @@ const AddMember = ({toggle,handleToggle,getRoles,roles,addUser,user,errorRespons
     </div>
   );
 };
+
 const mapStateToProps = ({rolesReducer,userReducer} )=> ({
   roles:  rolesReducer.roles,
   user: userReducer.user,
+  users: userReducer.users,
   errorResponse:userReducer.error
 });
 
-export default connect(mapStateToProps, {getRoles,addUser})(React.memo(AddMember));
+const mapDispatchToProps = {
+  getRoles,
+  addUser,
+  getUsers,
+  resetUser
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddMember);
+

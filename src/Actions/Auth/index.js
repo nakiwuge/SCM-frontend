@@ -62,19 +62,6 @@ export const login = (data)=>dispatch=>{
     });
 };
 
-export const getUser = (id)=>dispatch=>{
-
-  return axios.get(`/users/${id}`)
-    .then((res)=>{
-
-      return dispatch(authType(types.GET_USER_SUCCESS,res.data.data));
-    })
-    .catch(err=>{
-
-      return  dispatch(authType(types.GET_USER_FAILURE,err.response.data.error));
-    });
-};
-
 export const resetError = ()=>dispatch=>{
 
   return dispatch(authType(types.RESET_ERROR,null));
@@ -85,7 +72,6 @@ const initiaState = {
   isVerified:null,
   user:null,
   error:null,
-  currentUser:null
 };
 export const AuthReducer =(state=initiaState,action)=>{
 
@@ -106,13 +92,10 @@ export const AuthReducer =(state=initiaState,action)=>{
     return {...state,user:action.payload};
   case types.LOGIN_FAILURE:
     return {...state,error:action.payload};
-  case types.GET_USER_SUCCESS:
-    return {...state,currentUser:action.payload};
-  case types.GET_USER_FAILURE:
-    return {...state,error:action.payload};
   case types.RESET_ERROR:
     return {...state,error:action.payload};
+
   default:
-    return initiaState;
+    return state;
   }
 };

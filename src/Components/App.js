@@ -12,7 +12,7 @@ import Layout from './Common/Layout';
 import Transactions from './Transactions';
 import Members from './Members';
 import { authService } from '../Helpers/auth';
-import { getUser } from '../Actions/Auth';
+import { getUser } from '../Actions/Users';
 
 export const NotFound = () => (
   <section>
@@ -23,40 +23,39 @@ export const NotFound = () => (
 export const UserContext = React.createContext({
   currentUser: null,
 });
-const App = ({location, history,getUser,currentUser}) => {
-
-  const fetchUser = async()=>{
+class App extends React.Component  {
+  async componentDidMount(){
     const user = await authService.decodeToken();
+
     if(user){
-      getUser(user.id);
+      this.props.getUser(user.id);
     }
-  };
+  }
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
-  return (
-    <Router>
-      <UserContext.Provider value={currentUser}>
-        <Layout>
-          <Switch>
-            <ProtectedRoute exact path="/" currentUser={currentUser} location={location} history={history} component={Home} />
-            <Route exact path="/login" component={Auth} />
-            <Route exact path="/verify" component={VerifyPhoneNumber} />
-            <Route exact path="/verify-code" component={VerifyCode} />
-            <Route exact path="/password-reset" component={ResetPassword} />
-            <ProtectedRoute exact currentUser={currentUser} path="/transactions" component={Transactions} location={location} history={history}/>
-            <ProtectedRoute exact currentUser={currentUser} path="/members"location={location} history={history} component={Members} role={['admin']}/>
-            <ProtectedRoute currentUser={currentUser} location={location} history={history}component={NotFound} />
-          </Switch>
-        </Layout>
+  render(){
+    return (
+      <UserContext.Provider value={this.props.currentUser}>
+        <Router>
+          <Layout>
+            <Switch>
+              <ProtectedRoute exact path="/" component={Home} />
+              <Route exact path="/login" component={Auth} />
+              <Route exact path="/verify" component={VerifyPhoneNumber} />
+              <Route exact path="/verify-code" component={VerifyCode} />
+              <Route exact path="/password-reset" component={ResetPassword} />
+              <ProtectedRoute exact  path="/transactions" component={Transactions}/>
+              <ProtectedRoute exact  path="/members" component={Members} roles={['admin']}/>
+              <ProtectedRoute component={NotFound} />
+            </Switch>
+          </Layout>
+        </Router>
       </UserContext.Provider>
-    </Router>
-  );
-};
-const mapStateToProps = ({AuthReducer} )=> ({
-  currentUser:  AuthReducer.currentUser,
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  currentUser: state.userReducer.currentUser,
 });
 
-export default withRouter(connect(mapStateToProps, {getUser})(App));
+export default  withRouter(connect(mapStateToProps, {getUser})(App));

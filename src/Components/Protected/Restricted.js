@@ -1,7 +1,6 @@
 import React , {Component}from 'react';
 import { connect } from 'react-redux';
-import { authService } from '../../Helpers/auth';
-import { getUser } from '../../Actions/Auth';
+import { getUser } from '../../Actions/Users';
 
 class Restricted extends Component  {
 

@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <div className="footer">
-        copyright D17 2017
+      <p><i className="fa fa-copyright" aria-hidden="true"></i>  D17 2020</p>
     </div>
   );
 };
