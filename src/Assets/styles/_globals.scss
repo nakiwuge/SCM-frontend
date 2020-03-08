@@ -9,3 +9,56 @@ body,html{
 a {
     text-decoration: none;
 }
+ul {
+    list-style-type: none;
+  }
+section{
+    padding-top: 12vh
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+
+    h1{
+       letter-spacing: 2px;
+       color:$color-black;
+    }
+
+  button{
+      height: 50px;
+      padding:0 15px;
+      color:$color-grey;
+      background-color:$color-secondary;
+      font-size: 1.2em;
+      border-radius: 5px;
+  }
+  button:hover{
+     color:white;
+     background-color:$color-secondary-light;
+ }
+
+ @media only screen and (max-width: 500px) {
+  h1{
+  letter-spacing: 0;
+  }
+  button{
+    padding:0 8px;
+    font-size: 1em;
+ }
+}
+ }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}

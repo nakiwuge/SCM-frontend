@@ -30,17 +30,19 @@ const VerifyPhoneNumber = ({data,SendCode,error,history, resetError})=> {
 
   return (
     <div className="container verify">
-      <div className="alert alert-info">
+      <section>
+        <div className="alert alert-info">
         Please verify your Phone number
-      </div>
-      <AuthForm
-        action="verify"
-        code={data}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        error={errr}
-        isLoading={isLoading}
-      />
+        </div>
+        <AuthForm
+          action="verify"
+          code={data}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          error={errr}
+          isLoading={isLoading}
+        />
+      </section>
     </div>
   );
 };

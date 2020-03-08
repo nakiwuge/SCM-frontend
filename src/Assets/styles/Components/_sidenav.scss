@@ -1,0 +1,26 @@
+.side-nav{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    background-color:#2b3e56e8;
+
+    a{
+        color: $color-grey;
+    li{
+        width:20vh;
+        padding: 10px 0;
+        .icon{
+                padding-right:15px;
+                font-size:1.2em;
+                color: $color-grey;;
+        }
+    }}
+    li:hover{
+        background-color: rgba(255, 255, 255, 0.178);
+    }
+    a:hover{
+        text-decoration: none;
+    }
+}

@@ -3,13 +3,10 @@
     background-color: white;
     padding:45px;
 
-    .error{
-        color: red;
-        margin-bottom: 10px;
-    }
     label{
         font-weight:400;
     }
+
     .phone{
         span{
             color:$color-pale-black
@@ -17,13 +14,12 @@
     }
 
     button{
-        background-color: $color-secondary;
+        background-color: #3C5778;
         font-size: 20px;
+        color: white;
     }
     button:hover{
-       color: $color-pale-black;
-       background-color:$color-light-green;
-
+       background-color:$color-secondary-light;
     }
     .forgot-pwd{
         padding-bottom: 20px;

@@ -50,16 +50,13 @@ export const setPassword = (data)=>dispatch=>{
 };
 
 export const login = (data)=>dispatch=>{
-  // console.log("lll>",data)
 
   return axios.post('/users/login',data)
     .then((res)=>{
-      console.log('lll>',res.data);
       localStorage.setItem('jwt',res.data.data.token);
       dispatch(authType(types.LOGIN_SUCCESS,res.data.data));
     })
     .catch(err=>{
-      console.log('lll>',err);
 
       dispatch(authType(types.LOGIN_FAILURE,err.response.data.error));
     });
@@ -74,7 +71,7 @@ const initiaState = {
   code:null,
   isVerified:null,
   user:null,
-  error:null
+  error:null,
 };
 export const AuthReducer =(state=initiaState,action)=>{
 
@@ -97,7 +94,8 @@ export const AuthReducer =(state=initiaState,action)=>{
     return {...state,error:action.payload};
   case types.RESET_ERROR:
     return {...state,error:action.payload};
+
   default:
-    return initiaState;
+    return state;
   }
 };
