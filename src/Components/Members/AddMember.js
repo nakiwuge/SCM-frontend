@@ -5,15 +5,23 @@ import Select from '../Common/Select';
 import { isRequired, isEmail, currency } from '../../Helpers/validation';
 import { getRoles } from '../../Actions/Roles';
 import { addUser, getUsers,resetUser } from '../../Actions/Users';
+import withHandleChange from '../HOC/withHandleChange';
 
-const AddMember = ({toggle,handleToggle,getRoles,getUsers,resetUser,roles,addUser,user,errorResponse}) => {
-  const [data, setData]=useState({
-    email:'',
-    phoneNumber:'',
-    accountBalance:'',
-    role:''
-  });
-  const [error, setError] = useState(null);
+const AddMember = ({
+  toggle,
+  handleToggle,
+  getRoles,
+  getUsers,
+  resetUser,
+  roles,
+  addUser,
+  user,
+  errorResponse,
+  data,
+  handleChange,
+  error,
+  setError
+}) => {
   const [isLoading, setLoader] = useState(false);
 
   useEffect(()=>{
@@ -36,15 +44,6 @@ const AddMember = ({toggle,handleToggle,getRoles,getUsers,resetUser,roles,addUse
     };
 
   },[user]);
-
-  const handleChange =({target})=>{
-    const { name, value} = target;
-    setError(null);
-    setData({
-      ...data,
-      [name]:value
-    });
-  };
 
   const handleSubmit =async (event)=>{
     event.preventDefault();
@@ -98,6 +97,12 @@ const AddMember = ({toggle,handleToggle,getRoles,getUsers,resetUser,roles,addUse
     </div>
   );
 };
+const formData = {
+  email:'',
+  phoneNumber:'',
+  accountBalance:'',
+  role:''
+};
 
 const mapStateToProps = ({rolesReducer,userReducer} )=> ({
   roles:  rolesReducer.roles,
@@ -113,5 +118,5 @@ const mapDispatchToProps = {
   resetUser
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddMember);
+export default connect(mapStateToProps, mapDispatchToProps)(withHandleChange(AddMember,formData));
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { authService } from '../../Helpers/auth';
 
-
 const TopNav = ({handleToggle}) => {
   return (
     <div className="top-nav">

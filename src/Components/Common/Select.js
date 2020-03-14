@@ -7,8 +7,10 @@ const Select = ({data,title,handleChange, name}) => {
       <label htmlFor="role">{title}</label>
       <select className="form-control" id="role" name={name} onChange={handleChange}>
         <option key='0' >-- Select {title} --</option>
-        {data&&data.map(res=>(
-          <option key={res.id} value={res.id}>{res.name}</option>
+        {data&&data.map((res,index)=>(
+          res.id
+            ?<option key={res.id} value={res.id}>{res.name}</option>
+            :<option key={index} value={res}>{res}</option>
         ))}
       </select>
     </div>
