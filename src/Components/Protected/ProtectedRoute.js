@@ -11,7 +11,7 @@ class ProtectedRoute extends Component {
     const currentUser =  authService.decodeToken();
  
     if (props.roles ){
-      const isAuthorized = props.roles.includes(currentUser.role.name);
+      const isAuthorized = props.roles.includes(currentUser?.role?.name);
       if(!isAuthorized){
         return <Redirect to='/'/>;
       }
