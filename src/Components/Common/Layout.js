@@ -20,7 +20,7 @@ const LayOut = ({location,children}) => {
       <div className="row" hidden={pathname=='/login'}>
         <TopNav handleToggle={handleToggle}/>
       </div>
-      <div className="row" >
+      <div className="row">
         <div  className={sideNavClass} hidden={(urls.includes(pathname))}>
           <SideNav/>
         </div>
