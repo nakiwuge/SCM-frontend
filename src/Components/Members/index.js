@@ -6,16 +6,14 @@ import { getUsers } from '../../Actions/Users';
 import Table from '../Common/Table';
 import Spinner from '../Common/Spinner';
 import usePrevious from '../Hooks/usePrevious';
+import useHandleToggle from '../Hooks/useHandleToggle';
 
 const Members = ({getUsers,users}) => {
-  const [toggle, setToggle]=useState(false);
   const tableHeaders = ['First Name', 'Email', 'Phone Number', 'Account Balance', 'Role'];
   const [isLoading, setLoader]= useState(false);
-  const prevUsers = usePrevious(users);
+  const [toggle,setToggle,handleToggle] = useHandleToggle();
 
-  const handleToggle=()=>{
-    setToggle(!toggle);
-  };
+  const prevUsers = usePrevious(users);
 
   const fetchUsers = async()=>{
     setLoader(true);
@@ -24,12 +22,9 @@ const Members = ({getUsers,users}) => {
   };
 
   useEffect(()=>{
-
     if(!_.isEqual(prevUsers,users)){
-
       fetchUsers();
     }
-
   }, [users]);
 
   const renderTableData =data=>{
@@ -49,7 +44,7 @@ const Members = ({getUsers,users}) => {
       <section>
         <div className="header">
           <h1>Members</h1>
-          <button className="add-btn" onClick={handleToggle}>Add Member</button>
+          <button  onClick={handleToggle}>Add Member</button>
         </div>
         {isLoading
           ?<Spinner center={true} />

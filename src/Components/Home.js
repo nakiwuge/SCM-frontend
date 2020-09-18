@@ -1,6 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import Restricted from './Protected/Restricted';
 
 const Home = () => {
   return (

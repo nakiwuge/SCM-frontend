@@ -6,26 +6,25 @@ import Spinner from '../Common/Spinner';
 import { getTransactions } from '../../Actions/Transactions';
 import usePrevious from '../Hooks/usePrevious';
 import { formatDate } from '../../Helpers/formatDate';
-import AddTransaction from './AddTransaction';
-import useHandleToggle from '../Hooks/useHandleToggle';
+import { authService } from '../../Helpers/auth';
 
-const Transactions = ({getTransactions,transactions}) => {
-  const tableHeaders = ['First Name', 'Email', 'Amount', 'Transaction Type','Date'];
+const UserTransactions = ({getTransactions,transactions}) => {
+  const tableHeaders = ['Amount', 'Transaction Type','Date'];
   const [isLoading, setLoader]= useState(false);
-  const [toggle,setToggle,handleToggle] = useHandleToggle();
 
   const prevUsers = usePrevious(transactions);
 
-  const fetchTransactions = async()=>{
+  const fetchUsers = async()=>{
+    const currentUser = authService.decodeToken();
     setLoader(true);
-    await getTransactions();
+    await getTransactions(currentUser?.id);
     setLoader(false);
   };
 
   useEffect(()=>{
 
     if(!_.isEqual(prevUsers,transactions)){
-      fetchTransactions();
+      fetchUsers();
     }
 
   }, [transactions]);
@@ -33,8 +32,6 @@ const Transactions = ({getTransactions,transactions}) => {
   const renderTableData =data=>{
     return (data.map((result,index)=>(
       <tr key={index}>
-        <td>{result.first_name}</td>
-        <td>{result.email}</td>
         <td>{result.amount}</td>
         <td>{result.type}</td>
         <td>{formatDate(result.created_at)}</td>
@@ -46,8 +43,7 @@ const Transactions = ({getTransactions,transactions}) => {
     <div className="transactions">
       <section>
         <div className="header">
-          <h1>Transactions</h1>
-          <button onClick={handleToggle} >Add Transaction</button>
+          <h1>My Transactions</h1>
         </div>
         {isLoading
           ?<Spinner center={true} />
@@ -59,11 +55,6 @@ const Transactions = ({getTransactions,transactions}) => {
           />
         </div>
         }
-        {toggle
-        &&<AddTransaction
-          toggle={toggle}
-          handleToggle={handleToggle}
-        />}
       </section>
     </div>
   );
@@ -78,4 +69,4 @@ const mapDispatchToProps = {
   getTransactions
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Transactions);
+export default connect(mapStateToProps, mapDispatchToProps)(UserTransactions);

@@ -1,0 +1,30 @@
+.autocomplete{
+    .autocomplete{
+        position: relative;
+
+        .autocomplete-items{
+            width: 100%;
+            position: absolute;
+            top:100%;
+            left:0;
+            background-color:white;
+            z-index:99;
+            border:1px solid rgba(214, 212, 212, 0.438);
+            border-radius:3px;
+            box-shadow:2px  4px  5px rgba(128, 128, 128, 0.253);
+
+            p{
+                padding:5px;
+                margin-bottom: 0;
+                cursor: pointer;
+            }
+            
+            p:hover{
+                background-color: rgba(180, 177, 177, 0.123);
+            }
+        }
+        .hide{
+            display:none;
+        }
+    }
+};

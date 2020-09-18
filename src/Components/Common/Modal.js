@@ -13,7 +13,7 @@ const Modal = ({content,handleToggle,open,title,handleSubmit,isLoading,error}) =
               <span aria-hidden="true" onClick={handleToggle}>&times;</span>
             </button>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form autoComplete="off" onSubmit={handleSubmit}>
             <div className="modal-body">
               <div className="alert alert-danger" hidden={!error}>
                 <strong>Error!</strong> {error}
