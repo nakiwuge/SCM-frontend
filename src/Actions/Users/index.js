@@ -42,7 +42,7 @@ export const getUsers = () => async dispatch=>{
 
 export const getUser = (id)=>async dispatch=>{
 
-  return axios.get(`/admin/users/${id}`,config())
+  return axios.get(`/users/${id}`,await config())
     .then((res)=>{
 
       return dispatch(userType(types.GET_USER_SUCCESS,res.data.data));

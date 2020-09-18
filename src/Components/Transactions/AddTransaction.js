@@ -5,7 +5,7 @@ import Select from '../Common/Select';
 import { isRequired,  currency } from '../../Helpers/validation';
 import { getUsers } from '../../Actions/Users';
 import AutoCompleteInput from '../Common/AutoCompleteInput';
-import { addTransaction,resetTransaction } from '../../Actions/Transactions';
+import { addTransaction,resetTransaction,getTransactions } from '../../Actions/Transactions';
 
 const AddTransation = ({
   toggle,
@@ -38,10 +38,10 @@ const AddTransation = ({
   },[errorResponse]);
 
   useEffect(()=>{
-    if(data.user !==''){
-      getAutoData(data.user);
+    if(data?.user !==''){
+      getAutoData(data?.user);
     }
-  },[data.user]);
+  },[data?.user]);
 
   useEffect(()=>{
     if(transaction){
@@ -83,8 +83,8 @@ const AddTransation = ({
     const user = users.find(res=>res.email===data.user);
     const transData = {
       ...data,
-      amount:data.amount.replace(/,/g,''),
-      user:user.id
+      amount:data?.amount.replace(/,/g,''),
+      user:user?.id
     };
 
     if(validate){
@@ -148,7 +148,8 @@ const mapStateToProps = ({userReducer,transactionReducer} )=> ({
 const mapDispatchToProps = {
   addTransaction,
   getUsers,
-  resetTransaction
+  resetTransaction,
+  getTransactions
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTransation);

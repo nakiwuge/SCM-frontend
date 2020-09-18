@@ -25,9 +25,10 @@ export const addTransaction = (data)=>async dispatch=>{
     });
 };
 
-export const getTransactions = () => async dispatch=>{
+export const getTransactions = (userId) => async dispatch=>{
+  const url = userId?`/transactions/${userId}`:'/admin/transactions';
 
-  return axios.get('/transactions',await config())
+  return axios.get(url,await config())
     .then((res)=>{
       return  dispatch(transType(types.GET_TRANSACTIONS_SUCCESS,res.data.data));
     })

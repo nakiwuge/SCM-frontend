@@ -7,10 +7,11 @@ import { getUser } from '../../Actions/Users';
 class ProtectedRoute extends Component {
 
   render(){
-    const { component: Component,currentUser, ...props} = this.props;
-
-    if (currentUser && props.roles ){
-      const isAuthorized = props.roles.includes(currentUser.role_name);
+    const { component: Component, ...props} = this.props;
+    const currentUser =  authService.decodeToken();
+ 
+    if (props.roles ){
+      const isAuthorized = props.roles.includes(currentUser.role.name);
       if(!isAuthorized){
         return <Redirect to='/'/>;
       }

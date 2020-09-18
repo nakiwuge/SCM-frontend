@@ -6,21 +6,28 @@
     left:0;
     background-color:#2b3e56e8;
 
-    a{
-        color: $color-grey;
-    li{
-        width:20vh;
-        padding: 10px 0;
-        .icon{
+    ul{
+        width:90%;
+        a{
+            color: $color-grey;
+        li{
+            background-color: red($color: #000000);
+            padding: 10px 1px;
+            .icon{
                 padding-right:15px;
+                padding-left: 5px;
                 font-size:1.2em;
                 color: $color-grey;;
+            }
+        }}
+        li:hover{
+            background-color: rgba(255, 255, 255, 0.178);
         }
-    }}
-    li:hover{
-        background-color: rgba(255, 255, 255, 0.178);
+        a:hover{
+            text-decoration: none;
+        }
+
     }
-    a:hover{
-        text-decoration: none;
-    }
+
+ 
 }

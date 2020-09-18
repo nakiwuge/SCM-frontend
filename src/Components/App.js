@@ -13,6 +13,7 @@ import Transactions from './Transactions';
 import Members from './Members';
 import { authService } from '../Helpers/auth';
 import { getUser } from '../Actions/Users';
+import UserTransactions from './Transactions/UserTransactions';
 
 export const NotFound = () => (
   <section>
@@ -43,8 +44,9 @@ class App extends React.Component  {
               <Route exact path="/verify" component={VerifyPhoneNumber} />
               <Route exact path="/verify-code" component={VerifyCode} />
               <Route exact path="/password-reset" component={ResetPassword} />
-              <ProtectedRoute exact  path="/transactions" component={Transactions}/>
-              <ProtectedRoute exact  path="/members" component={Members} roles={['admin']}/>
+              <ProtectedRoute exact  path="/transactions" component={Transactions} roles={['admin','superAdmin']}/>
+              <ProtectedRoute exact  path="/members" component={Members} roles={['admin','superAdmin']}/>
+              <ProtectedRoute exact  path="/my-transactions" component={UserTransactions} />
               <ProtectedRoute component={NotFound} />
             </Switch>
           </Layout>

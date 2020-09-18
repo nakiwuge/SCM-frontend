@@ -26,7 +26,7 @@ export const authService = {
   },
   logoutUser() {
     localStorage.clear();
-    window.location.replace('/login');
+    window.location.reload('/login');
   },
 
   redirectUser() {
