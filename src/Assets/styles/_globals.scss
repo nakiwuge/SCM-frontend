@@ -28,12 +28,10 @@ section{
     }
 
   button{
-      height: 50px;
-      padding:0 15px;
-      color:$color-grey;
-      background-color:$color-secondary;
-      font-size: 1.2em;
-      border-radius: 5px;
+    color:white;
+    background-color:$color-secondary;
+    border:0px;
+    box-shadow: 3px 3px 5px #1b1b1b;
   }
   button:hover{
      color:white;
@@ -64,4 +62,24 @@ input[type=number] {
 }
 input:focus, textarea:focus, select:focus, button:focus{
   outline: none;
+}
+.ant-page-header-heading{
+  width: 100%;
+
+  button{
+    color:white;
+    background-color:$color-secondary;
+    border:0px;
+    box-shadow: 3px 3px 5px #1b1b1b;
+  }
+  button:hover{
+     color:white;
+     background-color:$color-secondary-light;
+ }
+}
+
+.ant-page-header-heading-title {
+  font-size: 2em !important;
+  letter-spacing: 2px;
+  color:$color-black !important;
 }

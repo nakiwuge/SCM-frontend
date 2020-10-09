@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './Components/App';
+import 'antd/dist/antd.css';
 import './Assets/styles/main.scss';
 import 'font-awesome/css/font-awesome.min.css';
 import Store from './Store/store';

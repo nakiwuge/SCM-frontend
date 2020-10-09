@@ -116,7 +116,7 @@ const AddTransation = ({
         </AutoCompleteInput>
 
       </div>
-      <Select data={['Deposit','Fine', 'Loan']} handleChange={handleChange} title="Transaction Type" name="type"/>
+      <Select data={['Deposit','Fine']} handleChange={handleChange} title="Transaction Type" name="type"/>
       <div className="form-group balance"  >
         <label htmlFor="amount">Amount<span>(UGX)</span>:</label>
         <input type="text" name="amount" value={currency(data.amount)} onChange={handleChange} className="form-control" id="amount" />

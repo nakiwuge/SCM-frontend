@@ -1,5 +1,6 @@
 import React, {useState, useEffect}from 'react';
 import { connect } from 'react-redux';
+import {Button,PageHeader} from 'antd';
 import _ from 'underscore';
 import Table from '../Common/Table';
 import Spinner from '../Common/Spinner';
@@ -45,10 +46,16 @@ const Transactions = ({getTransactions,transactions}) => {
   return (
     <div className="transactions">
       <section>
-        <div className="header">
-          <h1>Transactions</h1>
-          <button onClick={handleToggle} >Add Transaction</button>
-        </div>
+        <PageHeader
+          ghost={false}
+          onBack={() => window.history.back()}
+          title="Transactions"
+          extra={[
+            <Button key="1" type="default" onClick={handleToggle} size="large">
+          Add Transaction
+            </Button>    
+          ]}>
+        </PageHeader>
         {isLoading
           ?<Spinner center={true} />
           :transactions&&

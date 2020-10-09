@@ -1,5 +1,5 @@
 export const config = async()=>{
-  const token = await localStorage.getItem('jwt');
+  const token = localStorage.getItem('jwt');
   return {headers: {
     'Authorization' : `Bearer ${token}`
   }};

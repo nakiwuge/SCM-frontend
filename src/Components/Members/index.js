@@ -7,6 +7,7 @@ import Table from '../Common/Table';
 import Spinner from '../Common/Spinner';
 import usePrevious from '../Hooks/usePrevious';
 import useHandleToggle from '../Hooks/useHandleToggle';
+import {Button, PageHeader} from 'antd';
 
 const Members = ({getUsers,users}) => {
   const tableHeaders = ['First Name', 'Email', 'Phone Number', 'Account Balance', 'Role'];
@@ -42,10 +43,16 @@ const Members = ({getUsers,users}) => {
   return (
     <div className="members">
       <section>
-        <div className="header">
-          <h1>Members</h1>
-          <button  onClick={handleToggle}>Add Member</button>
-        </div>
+        <PageHeader
+          ghost={false}
+          onBack={() => window.history.back()}
+          title="Members"
+          extra={[
+            <Button key="1" type="default" onClick={handleToggle} size="large">
+              Add Member
+            </Button>    
+          ]}>
+        </PageHeader>
         {isLoading
           ?<Spinner center={true} />
           :users&&
