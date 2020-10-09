@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import axios from 'axios';
 import * as types from '../Types';
 import {config} from '../../Config/axios';
@@ -41,13 +42,38 @@ export const getTransactions = (userId) => async dispatch=>{
     });
 };
 
-// export const resetError = ()=>dispatch=>{
-//   return dispatch(transType(types.RESET_ERROR,null));
-// };
+export const resetError = ()=>dispatch=>{
+  return dispatch(transType(types.RESET_ERROR,null));
+};
 
-export const resetTransaction= ()=>dispatch=>{
+export const deleteTransaction= (id)=> async dispatch=>{
+ 
+  return axios.delete(`/transactions/${id}`, await config())
+    .then((res)=>{
+      return  dispatch(transType(types.DELETE_TRANSACTION_SUCCESS,res.data.data));
+    })
+    .catch(err=>{
+      if (err.response){
+        const {error}=err.response.data;
 
-  return dispatch(transType('RESET_TRANSACTION',null));
+        return dispatch(transType(types.DELETE_TRANSACTION_FAILURE,error));
+      }
+    });
+};
+
+export const undoTransaction = (id)=> async dispatch=>{
+ 
+  return axios.put(`/transactions/${id}`, {}, await config())
+    .then((res)=>{
+      return  dispatch(transType(types.UNDO_TRANSACTION_SUCCESS,res.data.data));
+    })
+    .catch(err=>{
+      if (err.response){
+        const {error}=err.response.data;
+
+        return dispatch(transType(types.UNDO_TRANSACTION_FAILURE,error));
+      }
+    });
 };
 
 const initiaState = {
@@ -57,19 +83,26 @@ const initiaState = {
 };
 
 export const transactionReducer =(state=initiaState,action)=>{
-
   switch(action.type){
   case types.GET_TRANSACTIONS_SUCCESS:
     return {...state,transactions:action.payload};
   case types.GET_TRANSACTIONS_FAILURE:
     return {...state,error:action.payload};
   case types.ADD_TRANSACTION_SUCCESS:
-    return {...state,transaction:action.payload};
+    return {...state,transactions:[action.payload, ...state.transactions], transaction:action.payload};
   case types.ADD_TRANSACTION_FAILURE:
     return {...state,error:action.payload};
-  case 'RESET_TRANSACTION':
-    return {...state,transaction:null};
-
+  case types.DELETE_TRANSACTION_SUCCESS:
+    const transactions = state.transactions.filter((item)=> item.transaction_id!==action.payload.id);
+    return {...state, transaction:action.payload,transactions};
+  case types.DELETE_TRANSACTION_FAILURE:
+    return {...state,error:action.payload};
+  case types.UNDO_TRANSACTION_SUCCESS:
+    return {...state, transaction:action.payload,transactions:[action.payload, ...state.transactions]};
+  case types.UNDO_TRANSACTION_FAILURE:
+    return {...state,error:action.payload};
+  case types.RESET_ERROR:
+    return {...state,error:action.payload};
   default:
     return state;
   }

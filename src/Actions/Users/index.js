@@ -54,15 +54,6 @@ export const getUser = (id)=>async dispatch=>{
     });
 };
 
-export const resetError = ()=>dispatch=>{
-  return dispatch(userType(types.RESET_ERROR,null));
-};
-
-export const resetUser= ()=>dispatch=>{
-
-  return dispatch(userType(types.RESET_USER,null));
-};
-
 const initiaState = {
   user:null,
   users:null,
@@ -74,7 +65,7 @@ export const userReducer =(state=initiaState,action)=>{
 
   switch(action.type){
   case types.ADD_USER_SUCCESS:
-    return {...state,user:action.payload};
+    return {...state,user:action.payload, users:[action.payload, ...state.users]};
   case types.ADD_USER_FAILURE:
     return {...state,error:action.payload};
   case types.GET_USERS_SUCCESS:

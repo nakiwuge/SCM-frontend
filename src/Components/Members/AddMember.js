@@ -4,15 +4,16 @@ import Modal from '../Common/Modal';
 import Select from '../Common/Select';
 import { isRequired, isEmail, currency } from '../../Helpers/validation';
 import { getRoles } from '../../Actions/Roles';
-import { addUser, getUsers,resetUser } from '../../Actions/Users';
+import { addUser, getUsers } from '../../Actions/Users';
+import { resetError } from '../../Actions/Transactions';
+
 import withHandleChange from '../HOC/withHandleChange';
 
 const AddMember = ({
   toggle,
   handleToggle,
   getRoles,
-  getUsers,
-  resetUser,
+  resetError,
   roles,
   addUser,
   user,
@@ -23,6 +24,7 @@ const AddMember = ({
   setError
 }) => {
   const [isLoading, setLoader] = useState(false);
+  const [prev, setPrev] = useState(user?.id);
 
   useEffect(()=>{
     getRoles();
@@ -35,12 +37,11 @@ const AddMember = ({
   },[errorResponse]);
 
   useEffect(()=>{
-    if(user){
-      getUsers();
+    if(user?.id !== prev){
       handleToggle();
     }
     return () => {
-      resetUser();
+      resetError();
     };
 
   },[user]);
@@ -115,7 +116,7 @@ const mapDispatchToProps = {
   getRoles,
   addUser,
   getUsers,
-  resetUser
+  resetError
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withHandleChange(AddMember,formData));

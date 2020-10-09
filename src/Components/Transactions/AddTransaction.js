@@ -5,7 +5,7 @@ import Select from '../Common/Select';
 import { isRequired,  currency } from '../../Helpers/validation';
 import { getUsers } from '../../Actions/Users';
 import AutoCompleteInput from '../Common/AutoCompleteInput';
-import { addTransaction,resetTransaction,getTransactions } from '../../Actions/Transactions';
+import { addTransaction,resetError } from '../../Actions/Transactions';
 
 const AddTransation = ({
   toggle,
@@ -14,9 +14,8 @@ const AddTransation = ({
   getUsers,
   addTransaction,
   transaction,
-  getTransactions,
-  resetTransaction,
-  errorResponse
+  errorResponse,
+  resetError
 }) => {
   const [data, setData]=useState({
     user:'',
@@ -27,10 +26,12 @@ const AddTransation = ({
   const [error, setError] = useState(null);
   const [isLoading, setLoader] = useState(false);
   const [autoData, setAutoData]= useState(null);
+  const [prev, setPrev] = useState(transaction?.id);
 
   useEffect(()=>{
     getUsers();
   },[]);
+
   useEffect(()=>{
     if(errorResponse){
       setError(errorResponse);
@@ -44,12 +45,11 @@ const AddTransation = ({
   },[data?.user]);
 
   useEffect(()=>{
-    if(transaction){
-      getTransactions();
+    if(prev!==transaction?.id){
       handleToggle();
     }
     return () => {
-      resetTransaction();
+      resetError(); 
     };
   },[transaction]);
 
@@ -148,8 +148,7 @@ const mapStateToProps = ({userReducer,transactionReducer} )=> ({
 const mapDispatchToProps = {
   addTransaction,
   getUsers,
-  resetTransaction,
-  getTransactions
+  resetError,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTransation);
